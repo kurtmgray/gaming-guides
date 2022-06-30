@@ -2,13 +2,15 @@
 
 <script context="module"> // need module in order to fetch data
   export async function load(context) { // load is a sveltekit function, context gives us access to fetch.. can destructure ({fetch})
-    const res = await context.fetch('https://jsonplaceholder.typicode.com/posts')
-    const guides = await res.json()
+    // const res = await context.fetch('https://jsonplaceholder.typicode.com/posts') <- for fetching from external endpoint
+    const res = await context.fetch('/guides.json') // our endpoint. if named abc.json.js, endpoint is /guides.abc.json
+    const {guides} = await res.json() //sending back an object so need to destructure
     if (res.ok) {
       console.log(guides)
       return {
         props: {
-          guides: guides
+          // guides: guides
+          guides: guides 
         }
       }
     }
